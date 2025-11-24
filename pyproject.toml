@@ -1,0 +1,83 @@
+# =========================================
+#   GOSH Python Project Quality Template
+#   Optimised for Ruff, Mypy, Pyright, Pytest
+#   Python 3.12+
+# =========================================
+
+# Uncomment for packaging
+# [build-system]
+# requires = ["setuptools>=61", "wheel"]
+# build-backend = "setuptools.build_meta"
+
+# [project]
+# name = "your-project-name"
+# version = "0.1.0"
+# description = "Your project description"
+# readme = "README.md"
+# requires-python = ">=3.12"
+# dependencies = [
+#     # Add your runtime dependencies
+# ]
+#
+# [project.optional-dependencies]
+# dev = [
+#     "pytest>=8.3.3",
+#     "pytest-cov>=7.0.0", 
+#     "mypy>=1.18.2",
+#     "ruff>=0.14.2",
+# ]
+
+# ---- Pytest ----
+[tool.pytest.ini_options]
+pythonpath = "src"
+testpaths = ["tests"]
+addopts = "--import-mode=importlib --cov=src --cov-report=term-missing"
+
+# ---- Ruff: global options ----
+[tool.ruff]
+line-length = 120
+target-version = "py312"
+fix = true
+
+# ---- Ruff: lint config ----
+[tool.ruff.lint]
+select = ["E", "F", "I", "N", "W", "UP", "D", "B"]
+ignore = ["D107"]  # Ignore "__init__" docstring requirement
+
+# Docstring style
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+# Import sorting configuration
+[tool.ruff.lint.isort]
+known-first-party = ["*"]
+force-single-line = false
+lines-after-imports = 2
+
+# ---- Ruff formatter options ----
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+skip-magic-trailing-comma = false
+docstring-code-format = true
+docstring-code-line-length = 120
+preview = true
+
+# ---- Pyright ----
+[tool.pyright]
+pythonVersion = "3.12"
+typeCheckingMode = "basic"
+useLibraryCodeForTypes = true
+venvPath = "."
+venv = ".venv"
+
+# ---- Mypy ----
+[tool.mypy]
+python_version = "3.12"
+mypy_path = ["src"]
+
+warn_return_any = true
+warn_unused_configs = true
+warn_unused_ignores = true
+ignore_missing_imports = true
+strict_equality = true

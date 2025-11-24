@@ -1,0 +1,578 @@
+{
+  "Assert Statement": {
+    "prefix": "assert",
+    "body": [
+      "assert ${1:condition}, \"${2:Error message}\""
+    ],
+    "description": "Assert statement"
+  },
+  "Class with Docstring": {
+    "prefix": "class-doc",
+    "body": [
+      "class ${1:ClassName}:",
+      "    \"\"\"",
+      "    ${2:Class description}",
+      "    \"\"\"",
+      "    ",
+      "    def __init__(self, ${3:args}) -> None:",
+      "        \"\"\"",
+      "        Initialize ${1:ClassName}",
+      "        ",
+      "        Args:",
+      "            ${3:args}: ${4:Description}",
+      "        \"\"\"",
+      "        $0"
+    ],
+    "description": "Class with docstring and __init__"
+  },
+  "CLI Argparse": {
+    "prefix": "cli-argparse",
+    "body": [
+      "import argparse",
+      "",
+      "def main():",
+      "    parser = argparse.ArgumentParser(description='${1:Description}')",
+      "    parser.add_argument('--${2:input}', required=True, help='${3:Input file}')",
+      "    args = parser.parse_args()",
+      "    $0",
+      "",
+      "if __name__ == '__main__':",
+      "    main()"
+    ],
+    "description": "Quick argparse CLI scaffold"
+  },
+  "Context Manager": {
+    "prefix": "ctx",
+    "body": [
+      "with ${1:resource} as ${2:var}:",
+      "    $0"
+    ],
+    "description": "Context manager block"
+  },
+  "Counter Usage": {
+    "prefix": "counter",
+    "body": [
+      "from collections import Counter",
+      "counts = Counter(${1:iterable})",
+      "print(counts.most_common(${2:5}))",
+      "$0"
+    ],
+    "description": "Use collections.Counter for frequency counting"
+  },
+  "Create SQLite Database": {
+    "prefix": "create-sqlite",
+    "body": [
+      "import sqlite3",
+      "from pathlib import Path",
+      "",
+      "def create_sqlite_db(db_path: Path) -> sqlite3.Connection:",
+      "    \"\"\"Create SQLite database and return connection\"\"\"",
+      "    conn = sqlite3.connect(db_path)",
+      "    cursor = conn.cursor()",
+      "    cursor.execute(",
+      "        '''CREATE TABLE IF NOT EXISTS ${1:table_name} (",
+      "            ${2:id} INTEGER PRIMARY KEY,",
+      "            ${3:column1} TEXT,",
+      "            ${4:column2} INTEGER",
+      "        )'''",
+      "    )",
+      "    conn.commit()",
+      "    return conn"
+    ],
+    "description": "Create SQLite database and example table"
+  },
+  "Dataclass": {
+    "prefix": "dataclass",
+    "body": [
+      "from dataclasses import dataclass",
+      "",
+      "@dataclass",
+      "class ${1:ClassName}:",
+      "    ${2:field}: ${3:type}",
+      "    $0"
+    ],
+    "description": "Create a dataclass"
+  },
+  "Docstring": {
+    "prefix": "doc",
+    "body": [
+      "\"\"\"",
+      "${1:Description}",
+      "",
+      "Args:",
+      "    ${2:arg}: ${3:Description}",
+      "",
+      "Returns:",
+      "    ${4:type}: ${5:Description}",
+      "",
+      "Raises:",
+      "    ${6:Exception}: ${7:Description}",
+      "\"\"\"",
+      "$0"
+    ],
+    "description": "Comprehensive docstring"
+  },
+  "Ensure Output Directory": {
+    "prefix": "ensure-outdir",
+    "body": [
+      "io.ensure_outdir(${1:output_path})",
+      "$0"
+    ],
+    "description": "Create output directory if missing"
+  },
+  "Filter DataFrame": {
+    "prefix": "filter-df",
+    "body": [
+      "# Filter DataFrame by condition",
+      "filtered_df = df[df['${1:column}'] ${2|>=,<=,>,<,==,!=|} ${3:value}]",
+      "$0"
+    ],
+    "description": "Filter DataFrame by column condition"
+  },
+  "Filter DataFrame Multiple": {
+    "prefix": "filter-df-multi",
+    "body": [
+      "# Filter DataFrame with multiple conditions",
+      "filtered_df = df[(df['${1:col1}'] ${2|>=,<=,>,<,==,!=|} ${3:val1}) & (df['${4:col2}'] ${5|>=,<=,>,<,==,!=|} ${6:val2})]",
+      "$0"
+    ],
+    "description": "Filter DataFrame with multiple conditions"
+  },
+  "Filter FASTA by Length": {
+    "prefix": "filter-fasta",
+    "body": [
+      "from Bio import SeqIO",
+      "filtered = [rec for rec in SeqIO.parse(${1:file_path}, 'fasta') if len(rec.seq) >= ${2:min_len}]",
+      "SeqIO.write(filtered, ${3:output_path}, 'fasta')",
+      "$0"
+    ],
+    "description": "Filter FASTA sequences by minimum length"
+  },
+  "Filter Nested Dictionary": {
+    "prefix": "filter-nested-dict",
+    "body": [
+      "# Filter nested dictionary by key/value condition",
+      "filtered = {k: v for k, v in ${1:data}.items() if ${2:condition_on_v}}",
+      "$0"
+    ],
+    "description": "Filter nested dictionary based on condition"
+  },
+  "Filter Pandas DataFrame": {
+    "prefix": "filter-pd",
+    "body": [
+      "# Filter DataFrame based on condition",
+      "filtered_df = df[df['${1:column}'] ${2|==,!=,>,<,>=,<=|} ${3:value}]",
+      "$0"
+    ],
+    "description": "Filter a pandas DataFrame based on column condition"
+  },
+  "Flatten Nested Dictionary": {
+    "prefix": "flatten-dict",
+    "body": [
+      "def flatten_dict(d: dict, parent_key: str = '', sep: str = '.') -> dict:",
+      "    items = []",
+      "    for k, v in d.items():",
+      "        new_key = f\"{parent_key}{sep}{k}\" if parent_key else k",
+      "        if isinstance(v, dict):",
+      "            items.extend(flatten_dict(v, new_key, sep=sep).items())",
+      "        else:",
+      "            items.append((new_key, v))",
+      "    return dict(items)"
+    ],
+    "description": "Flatten nested dictionary keys"
+  },
+  "For Loop with Type": {
+    "prefix": "for-type",
+    "body": [
+      "for ${1:item} in ${2:iterable}:",
+      "    ${3:# process ${1:item}}",
+      "    $0"
+    ],
+    "description": "For loop with type hints"
+  },
+  "Get Filename without Extension": {
+    "prefix": "basename",
+    "body": [
+      "from pathlib import Path",
+      "name = Path(${1:file_path}).stem",
+      "$0"
+    ],
+    "description": "Get file name without extension"
+  },
+  "Groupby Aggregate": {
+    "prefix": "groupby-agg",
+    "body": [
+      "agg_df = df.groupby('${1:column}')['${2:value_col}'].${3|sum,mean,count,max,min|}().reset_index()",
+      "$0"
+    ],
+    "description": "Group by and aggregate DataFrame"
+  },
+  "Import BAM File": {
+    "prefix": "import-bam",
+    "body": [
+      "import pysam",
+      "from pathlib import Path",
+      "",
+      "def open_bam(file_path: Path) -> pysam.AlignmentFile:",
+      "    \"\"\"Open BAM file using pysam\"\"\"",
+      "    bamfile = pysam.AlignmentFile(file_path, 'rb')",
+      "    return bamfile"
+    ],
+    "description": "Import BAM file using pysam"
+  },
+  "Import Excel File": {
+    "prefix": "import-excel",
+    "body": [
+      "import pandas as pd",
+      "from pathlib import Path",
+      "",
+      "def read_excel(file_path: Path, sheet_name: str | int = 0) -> pd.DataFrame:",
+      "    \"\"\"Read Excel file into pandas DataFrame\"\"\"",
+      "    df = pd.read_excel(file_path, sheet_name=sheet_name)",
+      "    return df"
+    ],
+    "description": "Import Excel file into pandas DataFrame"
+  },
+  "Import FASTA File": {
+    "prefix": "import-fasta",
+    "body": [
+      "from Bio import SeqIO",
+      "from pathlib import Path",
+      "",
+      "def read_fasta(file_path: Path) -> list:",
+      "    \"\"\"Read FASTA file into list of SeqRecord objects\"\"\"",
+      "    records = list(SeqIO.parse(file_path, 'fasta'))",
+      "    return records"
+    ],
+    "description": "Import FASTA file using Biopython SeqIO"
+  },
+  "Import JSON File": {
+    "prefix": "import-json",
+    "body": [
+      "import json",
+      "from pathlib import Path",
+      "",
+      "def read_json(file_path: Path) -> dict:",
+      "    \"\"\"Read JSON file into dictionary\"\"\"",
+      "    with open(file_path, 'r') as f:",
+      "        data = json.load(f)",
+      "    return data"
+    ],
+    "description": "Import and read JSON file into dictionary"
+  },
+  "Import VCF File": {
+    "prefix": "import-vcf",
+    "body": [
+      "import vcf",
+      "from pathlib import Path",
+      "",
+      "def read_vcf(file_path: Path):",
+      "    \"\"\"Read VCF file using PyVCF\"\"\"",
+      "    vcf_reader = vcf.Reader(open(file_path, 'r'))",
+      "    return vcf_reader"
+    ],
+    "description": "Import VCF file using PyVCF"
+  },
+  "Lambda Function": {
+    "prefix": "lambda",
+    "body": [
+      "lambda ${1:x}: ${2:expression}"
+    ],
+    "description": "Inline lambda function"
+  },
+  "Lambda Filter (list)": {
+  "prefix": "filter-lambda",
+  "body": [
+    "${1:filtered} = list(filter(lambda ${2:x}: ${3:condition}, ${4:iterable}))",
+    "$0"
+  ],
+  "description": "Use filter with a lambda on an iterable (e.g., list)"
+  },
+  "List Comprehension": {
+    "prefix": "listcomp",
+    "body": [
+      "[${1:x} for ${1:x} in ${2:iterable} if ${3:condition}]"
+    ],
+    "description": "List comprehension"
+  },
+  "List Files in Directory": {
+    "prefix": "list-files",
+    "body": [
+      "from pathlib import Path",
+      "files = list(Path(${1:directory}).glob('${2:*.txt}'))",
+      "$0"
+    ],
+    "description": "List files in directory matching pattern"
+  },
+  "Logging Statement": {
+    "prefix": "logger",
+    "body": [
+      "logger = logging.getLogger(__name__)",
+      "logger.${1|info,warning,error,debug|}(\"${2:message}\")"
+    ],
+    "description": "Import and use logger"
+  },
+  "Main Guard": {
+    "prefix": "main",
+    "body": [
+      "if __name__ == \"__main__\":",
+      "    ${1:main()}",
+      "    $0"
+    ],
+    "description": "Main entry point guard"
+  },
+  "Merge DataFrames": {
+    "prefix": "merge-df",
+    "body": [
+      "merged_df = pd.merge(${1:left_df}, ${2:right_df}, on='${3:key}', how='${4|inner,left,right,outer|}')",
+      "$0"
+    ],
+    "description": "Merge two pandas DataFrames on a key"
+  },
+  "Output JSON File": {
+    "prefix": "output-json",
+    "body": [
+      "import json",
+      "",
+      "def write_json(data: dict, file_path: Path, indent: int = 4) -> None:",
+      "    \"\"\"Write dictionary to JSON file\"\"\"",
+      "    with open(file_path, 'w') as f:",
+      "        json.dump(data, f, indent=indent)",
+      "    $0"
+    ],
+    "description": "Write dictionary to JSON file"
+  },
+  "Output TSV/CSV File": {
+    "prefix": "output-csv",
+    "body": [
+      "def write_tsv(df: pd.DataFrame, file_path: Path) -> None:",
+      "    \"\"\"Write pandas DataFrame to TSV/CSV file\"\"\"",
+      "    df.to_csv(file_path, sep='\\t', index=False)",
+      "    $0"
+    ],
+    "description": "Write pandas DataFrame to TSV/CSV file"
+  },
+  "Parse TSV/CSV": {
+    "prefix": "parse-tsv",
+    "body": [
+      "def parse_tsv(file_path: Path, skip_comments: bool = True) -> List[Dict[str, str]]:",
+      "    \"\"\"Parse TSV/CSV file into list of dictionaries\"\"\"",
+      "    records = []",
+      "    with open(file_path, 'r', newline='') as f:",
+      "        lines = [line for line in f if not (skip_comments and line.strip().startswith('#'))]",
+      "        reader = csv.DictReader(lines, delimiter='\\t')",
+      "        for row in reader:",
+      "            records.append(row)",
+      "    return records"
+    ],
+    "description": "Parse TSV/CSV file using csv module"
+  },
+  "Pytest Function": {
+    "prefix": "pytest-fn",
+    "body": [
+      "def test_${1:test_name}():",
+      "    \"\"\"",
+      "    ${2:Test description}",
+      "    \"\"\"",
+      "    # Arrange",
+      "    ${3:# setup}",
+      "    ",
+      "    # Act",
+      "    ${4:# action}",
+      "    ",
+      "    # Assert",
+      "    assert ${5:condition}, \"${6:Error message}\"",
+      "    $0"
+    ],
+    "description": "Create a pytest test function"
+  },
+  "Pytest Parametrize": {
+    "prefix": "pytest-param",
+    "body": [
+      "import pytest",
+      "",
+      "@pytest.mark.parametrize('${1:input_val},${2:expected}', [",
+      "    (${3:input1}, ${4:output1}),",
+      "    (${5:input2}, ${6:output2}),",
+      "])",
+      "def test_${7:function}( ${1:input_val}, ${2:expected} ):",
+      "    assert ${8:func_under_test}(${1:input_val}) == ${2:expected}",
+      "$0"
+    ],
+    "description": "Parametrized pytest function"
+  },
+  "Query SQLite Database": {
+    "prefix": "query-sqlite",
+    "body": [
+      "import sqlite3",
+      "",
+      "def query_sqlite(db_path: Path, query: str) -> list[tuple]:",
+      "    \"\"\"Execute SQL query on SQLite database and return results\"\"\"",
+      "    conn = sqlite3.connect(db_path)",
+      "    cursor = conn.cursor()",
+      "    cursor.execute(query)",
+      "    results = cursor.fetchall()",
+      "    conn.close()",
+      "    return results"
+    ],
+    "description": "Run query on SQLite database and fetch results"
+  },
+  "Read Text File": {
+    "prefix": "read-text",
+    "body": [
+      "with open(${1:file_path}, 'r') as f:",
+      "    lines = [line.strip() for line in f if line.strip()]",
+      "$0"
+    ],
+    "description": "Read text file into list of non-empty lines"
+  },
+  "Regex Extract": {
+    "prefix": "regex-extract",
+    "body": [
+      "import re",
+      "matches = re.findall(r'${1:pattern}', ${2:text})",
+      "$0"
+    ],
+    "description": "Extract matches from string using regex"
+  },
+  "Sort Dictionary": {
+    "prefix": "sort-dict",
+    "body": [
+      "sorted_dict = dict(sorted(${1:my_dict}.items(), key=lambda x: x[1], reverse=${2:False}))",
+      "$0"
+    ],
+    "description": "Sort dictionary by values"
+  },
+  "Split and Join String": {
+    "prefix": "split-join",
+    "body": [
+      "parts = ${1:string}.split('${2:delimiter}')",
+      "joined = '${2:delimiter}'.join(parts)",
+      "$0"
+    ],
+    "description": "Split and join strings"
+  },
+  "Timer Context": {
+    "prefix": "timer",
+    "body": [
+      "import time",
+      "start = time.time()",
+      "${1:# code block}",
+      "print(f'Elapsed: {time.time() - start:.2f}s')",
+      "$0"
+    ],
+    "description": "Simple timing block to measure runtime"
+  },
+  "Typer Command": {
+    "prefix": "typer-cmd",
+    "body": [
+      "@app.command()",
+      "def ${1:command_name}(",
+      "    ${2:arg}: ${3:type} = typer.Option(${4:default}, \"--${5:flag}\", help=\"${6:Description}\"),",
+      ") -> None:",
+      "    \"\"\"",
+      "    ${7:Command description}",
+      "    \"\"\"",
+      "    logger = logging.getLogger(__name__)",
+      "    logger.info(\"${1:command_name} command invoked\")",
+      "    $0"
+    ],
+    "description": "Create a Typer CLI command with options"
+  },
+  "Typer Argument": {
+    "prefix": "typer-arg",
+    "body": [
+      "${1:name}: ${2:type} = typer.Argument(${3:default}, help=\"${4:Description}\")"
+    ],
+    "description": "Typer argument parameter"
+  },
+  "Typer Option": {
+    "prefix": "typer-opt",
+    "body": [
+      "${1:name}: ${2:type} = typer.Option(${3:default}, \"--${1:name}\", help=\"${4:Description}\")"
+    ],
+    "description": "Typer option parameter"
+  },
+  "Type Alias": {
+    "prefix": "type-alias",
+    "body": [
+      "${1:TypeName} = ${2:Type}"
+    ],
+    "description": "Type alias"
+  },
+  "Type Hinted Function": {
+    "prefix": "def-type",
+    "body": [
+      "def ${1:function_name}(${2:args}) -> ${3:return_type}:",
+      "    \"\"\"",
+      "    ${4:Function description}",
+      "    ",
+      "    Args:",
+      "        ${5:arg}: ${6:Description}",
+      "    ",
+      "    Returns:",
+      "        ${3:return_type}: ${7:Description}",
+      "    \"\"\"",
+      "    $0"
+    ],
+    "description": "Create a type-hinted function with docstring"
+  },
+  "Typing Imports": {
+    "prefix": "typing",
+    "body": [
+      "from typing import ${1:List, Dict, Optional, Tuple, Union}"
+    ],
+    "description": "Common typing imports"
+  },
+  "Try Except Block": {
+    "prefix": "try-except",
+    "body": [
+      "try:",
+      "    ${1:code}",
+      "except ${2:Exception} as e:",
+      "    logger.error(f\"${3:Error message}: {e}\")",
+      "    raise",
+      "    $0"
+    ],
+    "description": "Try-except block with logging"
+  },
+  "Validate Path": {
+    "prefix": "validate-path",
+    "body": [
+      "if not io.validate_input_file(${1:path}):",
+      "    logger.error(f\"Invalid file: ${1:path}\")",
+      "    raise typer.Exit(code=1)"
+    ],
+    "description": "Validate input file path"
+  },
+  "Value Counts": {
+    "prefix": "value-counts",
+    "body": [
+      "counts = df['${1:column}'].value_counts()",
+      "print(counts.head())",
+      "$0"
+    ],
+    "description": "Count unique values in a DataFrame column"
+  },
+  "VCF INFO Extract": {
+    "prefix": "vcf-info",
+    "body": [
+      "import vcf",
+      "reader = vcf.Reader(open(${1:vcf_path}, 'r'))",
+      "for record in reader:",
+      "    print(record.INFO.get('${2:FIELD_NAME}'))",
+      "$0"
+    ],
+    "description": "Extract specific INFO field values from VCF"
+  },
+  "Write Text File": {
+    "prefix": "write-text",
+    "body": [
+      "with open(${1:file_path}, 'w') as f:",
+      "    f.write('\\n'.join(${2:lines}))",
+      "$0"
+    ],
+    "description": "Write list of strings to text file"
+  }
+}
+
