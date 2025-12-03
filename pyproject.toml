@@ -1,83 +1,301 @@
 # =========================================
 #   GOSH Python Project Quality Template
-#   Optimised for Ruff, Mypy, Pyright, Pytest
+#   Optimised for Ruff, Pylance/Pyright, Pytest
 #   Python 3.12+
 # =========================================
 
-# Uncomment for packaging
-# [build-system]
-# requires = ["setuptools>=61", "wheel"]
-# build-backend = "setuptools.build_meta"
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
 
-# [project]
-# name = "your-project-name"
-# version = "0.1.0"
-# description = "Your project description"
-# readme = "README.md"
-# requires-python = ">=3.12"
-# dependencies = [
-#     # Add your runtime dependencies
-# ]
-#
-# [project.optional-dependencies]
-# dev = [
-#     "pytest>=8.3.3",
-#     "pytest-cov>=7.0.0", 
-#     "mypy>=1.18.2",
-#     "ruff>=0.14.2",
-# ]
+[project]
+name = "project-name" # UPDATE: Rename project
+version = "0.1.0"
+description = "Add your description here" # UPDATE: Add project description
+authors = [{ name = "Your Name", email = "your.email@gosh.nhs.uk" }] # UPDATE: Add your details
+# license = { text = "MIT" }
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
 
-# ---- Pytest ----
-[tool.pytest.ini_options]
-pythonpath = "src"
-testpaths = ["tests"]
-addopts = "--import-mode=importlib --cov=src --cov-report=term-missing"
+]
 
-# ---- Ruff: global options ----
+[project.optional-dependencies]
+dev = [
+    "pyright",
+    "ruff",
+    "pre-commit==2.15.0",
+    "pytest>=8.0.0",
+    "pytest-cov>=4.1.0",
+]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["*"]
+exclude = ["tests*", "scripts*", "docs*", "examples*"]
+
+# # ============================================================
+# # UV SCRIPTS - Custom Commands
+# # ============================================================
+# [tool.uv]
+# # Run with: uv run format
+# # Formats code, fixes issues, and type checks
+# format = "ruff format . && ruff check . --fix && pyright"
+
+# # Run with: uv run check
+# # Lint and type check without fixing
+# check = "ruff check . && pyright"
+
+# # Run with: uv run lint
+# # Only linting, no type checking
+# lint = "ruff check . --fix"
+
+# ============================================================
+# RUFF CONFIGURATION - MAXIMUM STRICTNESS
+# ============================================================
 [tool.ruff]
-line-length = 120
 target-version = "py312"
+line-length = 120
+indent-width = 4
 fix = true
+show-fixes = true
 
-# ---- Ruff: lint config ----
 [tool.ruff.lint]
-select = ["E", "F", "I", "N", "W", "UP", "D", "B"]
-ignore = ["D107"]  # Ignore "__init__" docstring requirement
+# Comprehensive rule set for strict checking
+select = [
+    "E",      # pycodestyle errors
+    "F",      # pyflakes
+    "I",      # isort
+    "UP",     # pyupgrade
+    "B",      # flake8-bugbear
+    "C4",     # flake8-comprehensions
+    "T20",    # flake8-print (no print statements)
+    "SIM",    # flake8-simplify
+    "N",      # pep8-naming
+    "Q",      # flake8-quotes
+    "RUF",    # Ruff-specific rules
+    "ASYNC",  # flake8-async
+    "S",      # flake8-bandit (security)
+    "PTH",    # flake8-use-pathlib
+    "ERA",    # eradicate (commented-out code)
+    "PL",     # pylint
+    "PERF",   # perflint (performance)
+    "ANN",    # flake8-annotations
+    "ARG",    # flake8-unused-arguments
+    "RET",    # flake8-return
+    "TCH",    # flake8-type-checking
+]
 
-# Docstring style
+ignore = [
+    "E501",    # Line too long (formatter handles this)
+    "S603",    # subprocess without shell=True (too strict)
+    "S607",    # Starting a process with a partial path (too strict)
+    "ANN101",  # Missing type annotation for self (redundant)
+    "ANN102",  # Missing type annotation for cls (redundant)
+]
+
+# Per-file ignores
+[tool.ruff.lint.per-file-ignores]
+"__init__.py" = [
+    "F401",    # Allow unused imports in __init__.py
+]
+"tests/**/*.py" = [
+    "S101",    # Allow assert in tests
+    "PLR2004", # Allow magic values in tests
+    "ANN",     # Don't require annotations in tests
+]
+
+[tool.ruff.lint.isort]
+known-first-party = ["nipd-data-generator"]  # UPDATE: Should match project name above
+combine-as-imports = true
+force-sort-within-sections = true
+
 [tool.ruff.lint.pydocstyle]
 convention = "google"
 
-# Import sorting configuration
-[tool.ruff.lint.isort]
-known-first-party = ["*"]
-force-single-line = false
-lines-after-imports = 2
+[tool.ruff.lint.flake8-type-checking]
+# strict = true
+strict = false
 
-# ---- Ruff formatter options ----
 [tool.ruff.format]
-quote-style = "double"
-indent-style = "space"
-skip-magic-trailing-comma = false
-docstring-code-format = true
-docstring-code-line-length = 120
-preview = true
+quote-style = "double" # Like Black, use double quotes for strings.
+indent-style = "space" # Like Black, indent with spaces, rather than tabs.
+skip-magic-trailing-comma = false # Like Black, respect magic trailing commas.
+line-ending = "auto" # Like Black, automatically detect the appropriate line ending.
 
-# ---- Pyright ----
+# ============================================================
+# PYRIGHT CONFIGURATION - MAXIMUM STRICTNESS
+# TypeScript strict mode equivalent
+# ============================================================
 [tool.pyright]
 pythonVersion = "3.12"
-typeCheckingMode = "basic"
-useLibraryCodeForTypes = true
+# typeCheckingMode = "strict"
+
+# ============================================================
+# IMPORT AND MODULE CHECKS
+# ============================================================
+reportMissingImports = true
+# reportMissingTypeStubs = true  # Stricter: require type stubs
+reportUndefinedVariable = true
+reportAssertAlwaysTrue = true
+reportInvalidStringEscapeSequence = true
+
+# ============================================================
+# STRICT NULL SAFETY (like TS strictNullChecks)
+# ============================================================
+reportOptionalSubscript = true
+reportOptionalMemberAccess = true
+reportOptionalCall = true
+reportOptionalIterable = true
+reportOptionalContextManager = true
+reportOptionalOperand = true
+
+# ============================================================
+# TYPE COMPLETENESS (like TS noImplicitAny + strictFunctionTypes)
+# ============================================================
+reportMissingParameterType = true
+reportMissingTypeArgument = true
+reportUnknownParameterType = true
+reportUnknownLambdaType = true
+#reportUnknownArgumentType = true   # STRICT: Enable (can be noisy)
+#reportUnknownVariableType = true   # STRICT: Enable (can be noisy)
+#reportUnknownMemberType = true     # STRICT: Enable (can be noisy)
+reportUntypedFunctionDecorator = true
+reportUntypedClassDecorator = true
+reportUntypedBaseClass = true
+reportUntypedNamedTuple = true
+
+# ============================================================
+# CLASS AND INHERITANCE CHECKS
+# ============================================================
+reportIncompatibleMethodOverride = true
+reportIncompatibleVariableOverride = true
+reportInconsistentConstructor = true
+reportUninitializedInstanceVariable = true
+reportOverlappingOverload = true
+# reportMissingSuperCall = true  # STRICT: Enable
+
+# ============================================================
+# CODE QUALITY (like TS noUnusedLocals + noUnusedParameters)
+# ============================================================
+reportPrivateUsage = true
+reportConstantRedefinition = true
+reportInvalidStubStatement = true
+reportIncompleteStub = true
+reportUnsupportedDunderAll = true
+#reportUnusedClass = "error"        # STRICT: Error instead of warning
+#reportUnusedFunction = "error"     # STRICT: Error instead of warning
+#reportUnusedVariable = "error"     # STRICT: Error instead of warning
+#reportUnusedImport = "error"       # STRICT: Error instead of warning
+#reportDuplicateImport = "error"    # STRICT: Error instead of warning
+
+# ============================================================
+# UNNECESSARY CODE DETECTION
+# ============================================================
+# reportUnnecessaryIsInstance = "error"         # STRICT: Error
+# reportUnnecessaryCast = "error"               # STRICT: Error
+# reportUnnecessaryComparison = "error"         # STRICT: Error
+# reportUnnecessaryContains = "error"           # STRICT: Error
+# reportUnnecessaryTypeIgnoreComment = "error"  # STRICT: Error
+
+# ============================================================
+# FUNCTION/METHOD SIGNATURE STRICTNESS
+# ============================================================
+reportGeneralTypeIssues = true
+reportPropertyTypeMismatch = true
+reportFunctionMemberAccess = true
+reportCallInDefaultInitializer = true
+# reportImplicitStringConcatenation = true  # STRICT: Enable
+
+# ============================================================
+# ADDITIONAL STRICT CHECKS (Progressive Enhancement)
+# ============================================================
+# reportImplicitOverride = true    # STRICT: Require @override decorator (Python 3.12+)
+# reportShadowedImports = true     # STRICT: Detect shadowed imports
+reportDeprecated = "warning"     # Warn on deprecated usage
+
+# ============================================================
+# ADDITIONAL TYPE CHECKS
+# ============================================================
+reportImportCycles = "warning"
+
+# ============================================================
+# EXCLUSIONS
+# ============================================================
+exclude = [
+    "**/__pycache__",
+    "**/node_modules",
+    ".git",
+    ".mypy_cache",
+    ".pyright_cache",
+    ".ruff_cache",
+    ".pytest_cache",
+    ".venv",
+    "venv",
+    "env",
+    "logs",
+    "output",
+    "data",
+    "build",
+    "dist",
+    "*.egg-info",
+]
+
 venvPath = "."
 venv = ".venv"
 
-# ---- Mypy ----
-[tool.mypy]
-python_version = "3.12"
-mypy_path = ["src"]
+# ============================================================
+# PYTEST CONFIGURATION
+# ============================================================
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py", "*_test.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = [
+    "--strict-markers",
+    "--strict-config",
+    "--tb=short",
+    "--cov=.",
+    "--cov-report=term-missing:skip-covered",
+    "--cov-report=html",
+    "--cov-report=xml",
+#    "--cov-fail-under=80",  # STRICT: Require 80% coverage
+]
+markers = [
+    "slow: marks tests as slow (deselect with '-m \"not slow\"')",
+    "integration: marks tests as integration tests",
+    "unit: marks tests as unit tests",
+]
 
-warn_return_any = true
-warn_unused_configs = true
-warn_unused_ignores = true
-ignore_missing_imports = true
-strict_equality = true
+# ============================================================
+# COVERAGE CONFIGURATION
+# ============================================================
+[tool.coverage.run]
+source = ["."]
+# branch = true  # STRICT: Enable branch coverage
+omit = [
+    "*/tests/*",
+    "*/test_*.py",
+    "*/__pycache__/*",
+    "*/.venv/*",
+    "*/venv/*",
+    "*/scripts/*",
+]
+
+[tool.coverage.report]
+precision = 2
+show_missing = true
+skip_covered = false
+# fail_under = 80  # STRICT: Require 80% coverage
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "raise AssertionError",
+    "raise NotImplementedError",
+    "if __name__ == .__main__.:",
+    "if TYPE_CHECKING:",
+    "@abstractmethod",
+    "@overload",
+]
+
