@@ -12,7 +12,7 @@ This repository contains VS Code configuration files and tooling standards for t
 - **Fast Tooling**: Ruff for linting, formatting, and import sorting
 - **Documentation**: Google-style docstrings enforced
 - **Testing**: pytest with coverage reporting
-- **Type Checking**: MyPy integration with configurable strictness levels
+- **Type Checking**: Pylance/Pyright integration with configurable strictness levels
 - **Code Standard**: 120-character line length, consistent formatting
 
 ## Team Standards & PEP8 Deviations
