@@ -1,45 +1,28 @@
 {
-  // ---- Python env & testing ----
-  "python.defaultInterpreterPath": "${workspaceFolder}/.venv/bin/python",
-  "python.testing.pytestEnabled": true,
-  "python.testing.pytestArgs": ["-q"],
-  "python.testing.cwd": "${workspaceFolder}",
-  "python.analysis.typeCheckingMode": "basic",
-  "python.terminal.activateEnvironment": true,
-
-  // ---- Editor ergonomics ----
+    // ---- Editor ergonomics ----
   "editor.fontSize": 16,
   "terminal.integrated.fontSize": 14,
   "editor.wordWrap": "on",
   "editor.rulers": [120],
   "editor.renderWhitespace": "selection",
   "files.trimTrailingWhitespace": true,
-
-  // ---- Formatting ----
+  "python.analysis.autoImportCompletions": true,
   "editor.formatOnSave": true,
-  "editor.formatOnSaveMode": "file",
-
-  // Use Ruff for formatting and linting
-  "[python]": {
-    "editor.formatOnSave": true,
-    "editor.formatOnSaveMode": "file",
-    "editor.defaultFormatter": "charliermarsh.ruff",
-    "editor.codeActionsOnSave": {
-      "source.fixAll": "never",
-      "source.organizeImports": "never"
-    }
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": true,
+    "source.fixAll": true
   },
-  
-  // Ruff configuration
-  "ruff.path": ["${workspaceFolder}/.venv/bin/ruff"],
-  "ruff.nativeServer": "on",
-  "ruff.fixAll": true,
-  "ruff.organizeImports": true,
-  
-  // WSL-specific settings to ensure file watchers work
-  "files.watcherExclude": {
-    "**/.git/objects/**": true,
-    "**/.git/subtree-cache/**": true,
-    "**/node_modules/*/**": true
-  }
+  // ---- Python env & testing ----
+  "python.defaultInterpreterPath": ".venv/bin/python",
+  "python.testing.pytestEnabled": true,
+  "python.testing.unittestEnabled": false,
+  "python.testing.pytestArgs": ["-q"],
+  "python.testing.cwd": "${workspaceFolder}",
+  "python.terminal.activateEnvironment": true,
+  "[python]": {
+    "editor.defaultFormatter": "charliermarsh.ruff"
+  },
+  "ruff.enable": true,
+  "ruff.lint.enable": true,
+  "ruff.format.args": ["--config", "pyproject.toml"]
 }
