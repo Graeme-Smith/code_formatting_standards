@@ -51,7 +51,7 @@ exclude = ["tests*", "scripts*", "docs*", "examples*"]
 # lint = "ruff check . --fix"
 
 # ============================================================
-# RUFF CONFIGURATION - MAXIMUM STRICTNESS
+# RUFF CONFIGURATION - MEDIUM STRICTNESS
 # ============================================================
 [tool.ruff]
 target-version = "py312"
@@ -211,7 +211,7 @@ reportUntypedNamedTuple = true
 reportImportCycles = "warning"
 
 ## ============================================================
-## STRICT: Uncomment relevant sections to increase strictness
+## STRICT: Uncomment relevant sections for - MAXIMUM STRICTNESS
 ## ============================================================
 ## TYPE COMPLETENESS (like TS noImplicitAny + strictFunctionTypes)
 #reportUnknownArgumentType = true   # STRICT: Enable (can be noisy)
