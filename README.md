@@ -4,7 +4,6 @@ This repository contains VS Code configuration files and tooling standards for t
 
 * **Standardise** formatting and tooling across all team members
 * **Streamline** onboarding of new team members
-* **Ensure** consistent code quality across projects
 * **Reduce** setup time for new Python projects
 
 ## Features
@@ -13,7 +12,7 @@ This repository contains VS Code configuration files and tooling standards for t
 - **Documentation**: Google-style docstrings enforced
 - **Testing**: pytest with coverage reporting
 - **Type Checking**: Pylance/Pyright integration with configurable strictness levels
-- **Code Standard**: 120-character line length, consistent formatting
+- **Code Standard**: 120-character line length, consistent formatting, 
 
 ## Team Standards & PEP8 Deviations
 
@@ -22,7 +21,7 @@ The following standards were agreed as 'in-house' conventions after consultation
 * **Line length**: Maximum 120 characters (vs PEP8's 79)
 * **Docstring style**: Google format (vs PEP257's reStructuredText)
 * **Type hints**: Gradual adoption encouraged, required for public APIs
-* **Import organization**: Automatic sorting and grouping with Ruff
+* **Import organization**: Alphabetical sorting with Ruff (vs PEP8's group imports by type (stdlib, third-party, local))
 
 ## Getting Started
 
