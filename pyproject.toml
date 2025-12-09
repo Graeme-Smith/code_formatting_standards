@@ -173,7 +173,6 @@ reportIncompatibleVariableOverride = true
 reportInconsistentConstructor = true
 reportUninitializedInstanceVariable = true
 reportOverlappingOverload = true
-# reportMissingSuperCall = true  # STRICT: Enable
 
 # ============================================================
 # CODE QUALITY (like TS noUnusedLocals + noUnusedParameters)
@@ -183,20 +182,6 @@ reportConstantRedefinition = true
 reportInvalidStubStatement = true
 reportIncompleteStub = true
 reportUnsupportedDunderAll = true
-#reportUnusedClass = "error"        # STRICT: Error instead of warning
-#reportUnusedFunction = "error"     # STRICT: Error instead of warning
-#reportUnusedVariable = "error"     # STRICT: Error instead of warning
-#reportUnusedImport = "error"       # STRICT: Error instead of warning
-#reportDuplicateImport = "error"    # STRICT: Error instead of warning
-
-# ============================================================
-# UNNECESSARY CODE DETECTION
-# ============================================================
-# reportUnnecessaryIsInstance = "error"         # STRICT: Error
-# reportUnnecessaryCast = "error"               # STRICT: Error
-# reportUnnecessaryComparison = "error"         # STRICT: Error
-# reportUnnecessaryContains = "error"           # STRICT: Error
-# reportUnnecessaryTypeIgnoreComment = "error"  # STRICT: Error
 
 # ============================================================
 # FUNCTION/METHOD SIGNATURE STRICTNESS
@@ -205,19 +190,51 @@ reportGeneralTypeIssues = true
 reportPropertyTypeMismatch = true
 reportFunctionMemberAccess = true
 reportCallInDefaultInitializer = true
-# reportImplicitStringConcatenation = true  # STRICT: Enable
 
 # ============================================================
 # ADDITIONAL STRICT CHECKS (Progressive Enhancement)
 # ============================================================
-# reportImplicitOverride = true    # STRICT: Require @override decorator (Python 3.12+)
-# reportShadowedImports = true     # STRICT: Detect shadowed imports
 reportDeprecated = "warning"     # Warn on deprecated usage
+
+# ============================================================
+# TYPE COMPLETENESS (like TS noImplicitAny + strictFunctionTypes)
+# ============================================================
+reportMissingParameterType = true
+reportMissingTypeArgument = true
+reportUnknownParameterType = true
+reportUnknownLambdaType = true
+reportUntypedFunctionDecorator = true
+reportUntypedClassDecorator = true
+reportUntypedBaseClass = true
+reportUntypedNamedTuple = true
 
 # ============================================================
 # ADDITIONAL TYPE CHECKS
 # ============================================================
 reportImportCycles = "warning"
+
+## ============================================================
+## STRICT: Uncomment relevant sections to increase strictness
+## ============================================================#
+## STRICT: CLASS AND INHERITANCE CHECKS
+# reportMissingSuperCall = true  # STRICT: Enable
+##  STRICT: CODE QUALITY (like TS noUnusedLocals + noUnusedParameters)
+#reportUnusedClass = "error"        # STRICT: Error instead of warning
+#reportUnusedFunction = "error"     # STRICT: Error instead of warning
+#reportUnusedVariable = "error"     # STRICT: Error instead of warning
+#reportUnusedImport = "error"       # STRICT: Error instead of warning
+#reportDuplicateImport = "error"    # STRICT: Error instead of warning
+##  STRICT: UNNECESSARY CODE DETECTION
+# reportUnnecessaryIsInstance = "error"         # STRICT: Error
+# reportUnnecessaryCast = "error"               # STRICT: Error
+# reportUnnecessaryComparison = "error"         # STRICT: Error
+# reportUnnecessaryContains = "error"           # STRICT: Error
+# reportUnnecessaryTypeIgnoreComment = "error"  # STRICT: Error
+##  STRICT: FUNCTION/METHOD SIGNATURE STRICTNESS
+# reportImplicitStringConcatenation = true  # STRICT: Enable
+#  STRICT: ADDITIONAL STRICT CHECKS (Progressive Enhancement)
+# reportImplicitOverride = true    # STRICT: Require @override decorator (Python 3.12+)
+# reportShadowedImports = true     # STRICT: Detect shadowed imports
 
 # ============================================================
 # EXCLUSIONS
