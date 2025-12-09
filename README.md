@@ -6,26 +6,16 @@ This repository contains VS Code configuration files and tooling standards for t
 * **Streamline** onboarding of new team members
 * **Reduce** setup time for new Python projects
 
-## Features
-
-- **Fast Tooling**: Ruff for linting, formatting, and import sorting
-- **Documentation**: Google-style docstrings enforced
-- **Testing**: pytest with coverage reporting
-- **Type Checking**: Pylance/Pyright integration with configurable strictness levels
-- **Code Standard**: 120-character line length, consistent formatting, 
-
-## Team Standards & PEP8 Deviations
-
+## Features, Team Standards & PEP8 Deviations
+* **Fast Tooling**: Ruff for linting, formatting, and import sorting
+* **Type Checking**: Pylance/Pyright integration with configurable strictness levels
 The following standards were agreed as 'in-house' conventions after consultation with team members:
-
 * **Line length**: Maximum 120 characters (vs PEP8's 79)
 * **Docstring style**: Google format (vs PEP257's reStructuredText)
 * **Type hints**: Gradual adoption encouraged, required for public APIs
 * **Import organization**: Alphabetical sorting with Ruff (vs PEP8's group imports by type (stdlib, third-party, local))
 
 ## Getting Started
-
-### For GOSH Team Members
 
 **Option 1: Copy configuration to your existing project**
 
@@ -83,9 +73,9 @@ Press `Ctrl+Shift+P` and type:
 * **"Python: Run Tests"** - Execute pytest
 * **"MyPy: Run Type Checking"** - Manual type check
 
-### Configuring MyPy Strictness
+### Configuring Pyright Typing Strictness
 
-The `pyproject.toml` includes three MyPy strictness levels. Choose based on your project's needs:
+The `pyproject.toml` includes three two strictness levels. Choose based on your project's needs:
 
 ### Level 1: Permissive (Default)
 ```toml
@@ -116,14 +106,3 @@ strict = true                     # All strict checks enabled
 4. **Uncomment desired level** (remove `#`)
 5. **Run MyPy** to see current issues: `mypy src/`
 
-### Testing Your Configuration
-```bash
-# Check type issues
-mypy src/
-
-# Run with specific files
-mypy src/your_file.py
-
-# See MyPy configuration in use
-mypy --config-file pyproject.toml --show-config
-```
