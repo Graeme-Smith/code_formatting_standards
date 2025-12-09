@@ -15,7 +15,7 @@ description = "Add your description here" # UPDATE: Add project description
 authors = [{ name = "Your Name", email = "your.email@gosh.nhs.uk" }] # UPDATE: Add your details
 # license = { text = "MIT" }
 readme = "README.md"
-requires-python = ">=3.12"
+requires-python = ">=3.12" # UPDATE as appropiate
 dependencies = [
 
 ]
@@ -34,27 +34,24 @@ where = ["."]
 include = ["*"]
 exclude = ["tests*", "scripts*", "docs*", "examples*"]
 
-# # ============================================================
-# # UV SCRIPTS - Custom Commands
-# # ============================================================
-# [tool.uv]
-# # Run with: uv run format
-# # Formats code, fixes issues, and type checks
-# format = "ruff format . && ruff check . --fix && pyright"
+# ============================================================
+# CLI Formatting Commands
+# ============================================================
 
-# # Run with: uv run check
-# # Lint and type check without fixing
-# check = "ruff check . && pyright"
+# Formats code, fixes issues, and type checks
+# ruff format . && ruff check . --fix && pyright
 
-# # Run with: uv run lint
-# # Only linting, no type checking
-# lint = "ruff check . --fix"
+# Lint and type check without fixing
+# ruff check . && pyright
+
+# Only linting, no type checking
+# ruff check . --fix
 
 # ============================================================
 # RUFF CONFIGURATION - MEDIUM STRICTNESS
 # ============================================================
 [tool.ruff]
-target-version = "py312"
+target-version = "py312" # UPDATE as appropiate
 line-length = 120
 indent-width = 4
 fix = true
@@ -106,7 +103,7 @@ ignore = [
 ]
 
 [tool.ruff.lint.isort]
-known-first-party = ["nipd-data-generator"]  # UPDATE: Should match project name above
+# known-first-party = ["YOUR-PROJECT-NAME"]  # Should match project name above, only used if sorting imports by type
 # combine-as-imports = true # Optional: group imports by type (stdlib, third-party, local)
 force-sort-within-sections = true
 
@@ -128,14 +125,12 @@ line-ending = "auto" # Like Black, automatically detect the appropriate line end
 # TypeScript strict mode equivalent
 # ============================================================
 [tool.pyright]
-pythonVersion = "3.12"
-# typeCheckingMode = "strict"
+pythonVersion = "3.12" # UPDATE as appropiate
 
 # ============================================================
 # IMPORT AND MODULE CHECKS
 # ============================================================
 reportMissingImports = true
-# reportMissingTypeStubs = true  # Stricter: require type stubs
 reportUndefinedVariable = true
 reportAssertAlwaysTrue = true
 reportInvalidStringEscapeSequence = true
@@ -213,6 +208,10 @@ reportImportCycles = "warning"
 ## ============================================================
 ## STRICT: Uncomment relevant sections for - MAXIMUM STRICTNESS
 ## ============================================================
+## PYRIGHT CONFIGURATION - MAXIMUM STRICTNESS
+# typeCheckingMode = "strict"
+## IMPORT AND MODULE CHECKS
+# reportMissingTypeStubs = true  # Stricter: require type stubs
 ## TYPE COMPLETENESS (like TS noImplicitAny + strictFunctionTypes)
 #reportUnknownArgumentType = true   # STRICT: Enable (can be noisy)
 #reportUnknownVariableType = true   # STRICT: Enable (can be noisy)
