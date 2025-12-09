@@ -157,9 +157,6 @@ reportMissingParameterType = true
 reportMissingTypeArgument = true
 reportUnknownParameterType = true
 reportUnknownLambdaType = true
-#reportUnknownArgumentType = true   # STRICT: Enable (can be noisy)
-#reportUnknownVariableType = true   # STRICT: Enable (can be noisy)
-#reportUnknownMemberType = true     # STRICT: Enable (can be noisy)
 reportUntypedFunctionDecorator = true
 reportUntypedClassDecorator = true
 reportUntypedBaseClass = true
@@ -215,7 +212,11 @@ reportImportCycles = "warning"
 
 ## ============================================================
 ## STRICT: Uncomment relevant sections to increase strictness
-## ============================================================#
+## ============================================================
+## TYPE COMPLETENESS (like TS noImplicitAny + strictFunctionTypes)
+#reportUnknownArgumentType = true   # STRICT: Enable (can be noisy)
+#reportUnknownVariableType = true   # STRICT: Enable (can be noisy)
+#reportUnknownMemberType = true     # STRICT: Enable (can be noisy)
 ## STRICT: CLASS AND INHERITANCE CHECKS
 # reportMissingSuperCall = true  # STRICT: Enable
 ##  STRICT: CODE QUALITY (like TS noUnusedLocals + noUnusedParameters)
