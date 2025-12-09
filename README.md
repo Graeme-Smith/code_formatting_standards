@@ -9,6 +9,7 @@ This repository contains VS Code configuration files and tooling standards for t
 ## Features, Team Standards & PEP8 Deviations
 * **Fast Tooling**: Ruff for linting, formatting, and import sorting
 * **Type Checking**: Pylance/Pyright integration with configurable strictness levels
+
 The following standards were agreed as 'in-house' conventions after consultation with team members:
 * **Line length**: Maximum 120 characters (vs PEP8's 79)
 * **Docstring style**: Google format (vs PEP257's reStructuredText)
