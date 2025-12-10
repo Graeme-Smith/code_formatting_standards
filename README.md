@@ -134,7 +134,7 @@ pytest
 - Update `[project]` metadata (name, description, authors) for your specific service or analysis pipeline.
 - Teams may extend Ruff/Pyright rules locally, but core conventions (line length, docstrings, imports) should remain aligned with this template to maximise consistency across the GOSH Bioinformatics codebase.
 
-Notes
+## Notes
 Excluding sections from formatting
 
 If you need to keep a small section of code exactly as written (e.g. alignment-sensitive output or embedded templates), you can disable the formatter with pragmas: add # fmt: off before the block and # fmt: on after it.
