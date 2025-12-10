@@ -2,7 +2,7 @@
 # =========================================
 #   GOSH Python Project Quality Template
 #   Optimised for Ruff, Pylance/Pyright, Pytest
-#   Python 3.12+
+#   Python 3.10+
 # =========================================
 
 [build-system]
@@ -16,7 +16,7 @@ description = "Add your description here" # UPDATE: Add project description
 authors = [{ name = "Your Name", email = "your.email@gosh.nhs.uk" }] # UPDATE: Add your details
 # license = { text = "MIT" }
 readme = "README.md"
-requires-python = ">=3.12" # UPDATE as appropiate
+requires-python = ">=3.10" # UPDATE as appropriate
 dependencies = [
 
 ] # Add dependencies as appropriate
@@ -25,7 +25,7 @@ dependencies = [
 dev = [
     "pyright",
     "ruff",
-    "pre-commit==2.15.0",
+    "pre-commit>=2.15.0",
     "pytest>=8.0.0",
     "pytest-cov>=4.1.0",
 ]
@@ -38,7 +38,7 @@ package-dir = {"" = "src"}
 [tool.setuptools.packages.find]
 where = ["src"]
 include = ["*"]
-exclude = ["tests*", "scripts*", "docs*", "examples*"] # Ammend as necessary
+exclude = ["tests*", "scripts*", "docs*", "examples*"] # Amend as necessary
 
 # ============================================================
 # CLI Formatting Commands
@@ -57,7 +57,7 @@ exclude = ["tests*", "scripts*", "docs*", "examples*"] # Ammend as necessary
 # RUFF CONFIGURATION - MEDIUM STRICTNESS
 # ============================================================
 [tool.ruff]
-target-version = "py312" # UPDATE as appropiate
+target-version = "py310" # UPDATE as appropriate
 line-length = 120
 indent-width = 4
 fix = true
@@ -70,7 +70,7 @@ select = [
     "F",      # pyflakes
     "I",      # isort
     "UP",     # pyupgrade
-    "B",      # flake8-bugbear
+    "B",      # flake8-bugbear  (Noisy)
     "C4",     # flake8-comprehensions
     "T20",    # flake8-print (no print statements)
     "SIM",    # flake8-simplify
@@ -81,9 +81,9 @@ select = [
     "S",      # flake8-bandit (security)
     "PTH",    # flake8-use-pathlib
     "ERA",    # eradicate (commented-out code)
-    "PL",     # pylint
+    "PL",     # pylint (Noisy)
     "PERF",   # perflint (performance)
-    "ANN",    # flake8-annotations
+    "ANN",    # flake8-annotations  (Noisy)
     "ARG",    # flake8-unused-arguments
     "RET",    # flake8-return
     "TCH",    # flake8-type-checking
@@ -91,8 +91,8 @@ select = [
 
 ignore = [
     "E501",    # Line too long (formatter handles this)
-    "S603",    # subprocess without shell=True (too strict)
-    "S607",    # Starting a process with a partial path (too strict)
+    "S603",    # subprocess without shell=True (too strict - regularly use subprocess in clinical pipelines)
+    "S607",    # Starting a process with a partial path (too strict - regularly use subprocess in clinical pipelines)
     "ANN101",  # Missing type annotation for self (redundant)
     "ANN102",  # Missing type annotation for cls (redundant)
 ]
@@ -126,23 +126,19 @@ skip-magic-trailing-comma = false # Like Black, respect magic trailing commas.
 line-ending = "auto" # Like Black, automatically detect the appropriate line ending.
 
 # ============================================================
-# PYRIGHT CONFIGURATION - MAXIMUM STRICTNESS
-# TypeScript strict mode equivalent
+# PYRIGHT CONFIGURATION - MODERATE STRICTNESS
 # ============================================================
 [tool.pyright]
-pythonVersion = "3.12" # UPDATE as appropiate
-typeCheckingMode = "basic" # UPDATE as appropiate off, basic, strict
-# ============================================================
+pythonVersion = "3.12"
+typeCheckingMode = "basic"  # Change to "strict" if you enable strict mode below
+
 # IMPORT AND MODULE CHECKS
-# ============================================================
 reportMissingImports = true
 reportUndefinedVariable = true
 reportAssertAlwaysTrue = true
 reportInvalidStringEscapeSequence = true
 
-# ============================================================
-# STRICT NULL SAFETY (like TS strictNullChecks)
-# ============================================================
+# STRICT NULL SAFETY
 reportOptionalSubscript = true
 reportOptionalMemberAccess = true
 reportOptionalCall = true
@@ -150,9 +146,7 @@ reportOptionalIterable = true
 reportOptionalContextManager = true
 reportOptionalOperand = true
 
-# ============================================================
-# TYPE COMPLETENESS (like TS noImplicitAny + strictFunctionTypes)
-# ============================================================
+# TYPE COMPLETENESS
 reportMissingParameterType = true
 reportMissingTypeArgument = true
 reportUnknownParameterType = true
@@ -162,88 +156,31 @@ reportUntypedClassDecorator = true
 reportUntypedBaseClass = true
 reportUntypedNamedTuple = true
 
-# ============================================================
 # CLASS AND INHERITANCE CHECKS
-# ============================================================
 reportIncompatibleMethodOverride = true
 reportIncompatibleVariableOverride = true
 reportInconsistentConstructor = true
 reportUninitializedInstanceVariable = true
 reportOverlappingOverload = true
 
-# ============================================================
-# CODE QUALITY (like TS noUnusedLocals + noUnusedParameters)
-# ============================================================
+# CODE QUALITY
 reportPrivateUsage = true
 reportConstantRedefinition = true
 reportInvalidStubStatement = true
 reportIncompleteStub = true
 reportUnsupportedDunderAll = true
 
-# ============================================================
 # FUNCTION/METHOD SIGNATURE STRICTNESS
-# ============================================================
 reportGeneralTypeIssues = true
 reportPropertyTypeMismatch = true
 reportFunctionMemberAccess = true
 reportCallInDefaultInitializer = true
 
-# ============================================================
-# ADDITIONAL STRICT CHECKS (Progressive Enhancement)
-# ============================================================
-reportDeprecated = "warning"     # Warn on deprecated usage
-
-# ============================================================
-# TYPE COMPLETENESS (like TS noImplicitAny + strictFunctionTypes)
-# ============================================================
-reportMissingParameterType = true
-reportMissingTypeArgument = true
-reportUnknownParameterType = true
-reportUnknownLambdaType = true
-reportUntypedFunctionDecorator = true
-reportUntypedClassDecorator = true
-reportUntypedBaseClass = true
-reportUntypedNamedTuple = true
-
-# ============================================================
-# ADDITIONAL TYPE CHECKS
-# ============================================================
+# ADDITIONAL STRICT CHECKS
+reportDeprecated = "warning"
 reportImportCycles = "warning"
 
-## ============================================================
-## STRICT: Uncomment relevant sections for - MAXIMUM STRICTNESS
-## ============================================================
-## PYRIGHT CONFIGURATION - MAXIMUM STRICTNESS
-# typeCheckingMode = "strict"
-## IMPORT AND MODULE CHECKS
-# reportMissingTypeStubs = true  # Stricter: require type stubs
-## TYPE COMPLETENESS (like TS noImplicitAny + strictFunctionTypes)
-#reportUnknownArgumentType = true   # STRICT: Enable (can be noisy)
-#reportUnknownVariableType = true   # STRICT: Enable (can be noisy)
-#reportUnknownMemberType = true     # STRICT: Enable (can be noisy)
-## STRICT: CLASS AND INHERITANCE CHECKS
-# reportMissingSuperCall = true  # STRICT: Enable
-##  STRICT: CODE QUALITY (like TS noUnusedLocals + noUnusedParameters)
-#reportUnusedClass = "error"        # STRICT: Error instead of warning
-#reportUnusedFunction = "error"     # STRICT: Error instead of warning
-#reportUnusedVariable = "error"     # STRICT: Error instead of warning
-#reportUnusedImport = "error"       # STRICT: Error instead of warning
-#reportDuplicateImport = "error"    # STRICT: Error instead of warning
-##  STRICT: UNNECESSARY CODE DETECTION
-# reportUnnecessaryIsInstance = "error"         # STRICT: Error
-# reportUnnecessaryCast = "error"               # STRICT: Error
-# reportUnnecessaryComparison = "error"         # STRICT: Error
-# reportUnnecessaryContains = "error"           # STRICT: Error
-# reportUnnecessaryTypeIgnoreComment = "error"  # STRICT: Error
-##  STRICT: FUNCTION/METHOD SIGNATURE STRICTNESS
-# reportImplicitStringConcatenation = true  # STRICT: Enable
-#  STRICT: ADDITIONAL STRICT CHECKS (Progressive Enhancement)
-# reportImplicitOverride = true    # STRICT: Require @override decorator (Python 3.12+)
-# reportShadowedImports = true     # STRICT: Detect shadowed imports
-
-# ============================================================
 # EXCLUSIONS
-# ============================================================
 exclude = [
     "**/__pycache__",
     "**/node_modules",
@@ -266,6 +203,27 @@ exclude = [
 venvPath = "."
 venv = ".venv"
 
+# STRICT MODE OPTIONS (commented out for now)
+# typeCheckingMode = "strict"
+# reportMissingTypeStubs = true
+# reportUnknownArgumentType = true
+# reportUnknownVariableType = true
+# reportUnknownMemberType = true
+# reportMissingSuperCall = true
+# reportUnusedClass = "error"
+# reportUnusedFunction = "error"
+# reportUnusedVariable = "error"
+# reportUnusedImport = "error"
+# reportDuplicateImport = "error"
+# reportUnnecessaryIsInstance = "error"
+# reportUnnecessaryCast = "error"
+# reportUnnecessaryComparison = "error"
+# reportUnnecessaryContains = "error"
+# reportUnnecessaryTypeIgnoreComment = "error"
+# reportImplicitStringConcatenation = true
+# reportImplicitOverride = true
+# reportShadowedImports = true
+
 # ============================================================
 # PYTEST CONFIGURATION
 # ============================================================
@@ -278,7 +236,7 @@ addopts = [
     "--strict-markers",
     "--strict-config",
     "--tb=short",
-    "--cov=.",
+    "--cov=src",
     "--cov-report=term-missing:skip-covered",
     "--cov-report=html",
     "--cov-report=xml",
@@ -296,7 +254,7 @@ pythonpath = [
 # COVERAGE CONFIGURATION
 # ============================================================
 [tool.coverage.run]
-source = ["."]
+source = ["src"]
 # branch = true  # STRICT: Enable branch coverage
 omit = [
     "*/tests/*",
@@ -317,7 +275,7 @@ exclude_lines = [
     "def __repr__",
     "raise AssertionError",
     "raise NotImplementedError",
-    "if __name__ == .__main__.:",
+    'if __name__ == "__main__":',
     "if TYPE_CHECKING:",
     "@abstractmethod",
     "@overload",
