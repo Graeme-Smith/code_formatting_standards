@@ -1,3 +1,4 @@
+#:schema https://json.schemastore.org/pyproject.json
 # =========================================
 #   GOSH Python Project Quality Template
 #   Optimised for Ruff, Pylance/Pyright, Pytest
@@ -18,7 +19,7 @@ readme = "README.md"
 requires-python = ">=3.12" # UPDATE as appropiate
 dependencies = [
 
-]
+] # Add dependencies as appropriate
 
 [project.optional-dependencies]
 dev = [
@@ -29,10 +30,15 @@ dev = [
     "pytest-cov>=4.1.0",
 ]
 
+# [project.scripts]
+# cli-tool-name = "project-name.cli:main"
+[tool.setuptools]
+package-dir = {"" = "src"}
+
 [tool.setuptools.packages.find]
-where = ["."]
+where = ["src"]
 include = ["*"]
-exclude = ["tests*", "scripts*", "docs*", "examples*"]
+exclude = ["tests*", "scripts*", "docs*", "examples*"] # Ammend as necessary
 
 # ============================================================
 # CLI Formatting Commands
@@ -111,8 +117,7 @@ force-sort-within-sections = true
 convention = "google"
 
 [tool.ruff.lint.flake8-type-checking]
-# strict = true
-strict = false
+strict = false # Update as necessary
 
 [tool.ruff.format]
 quote-style = "double" # Like Black, use double quotes for strings.
@@ -126,7 +131,7 @@ line-ending = "auto" # Like Black, automatically detect the appropriate line end
 # ============================================================
 [tool.pyright]
 pythonVersion = "3.12" # UPDATE as appropiate
-
+typeCheckingMode = "basic" # UPDATE as appropiate off, basic, strict
 # ============================================================
 # IMPORT AND MODULE CHECKS
 # ============================================================
@@ -284,7 +289,9 @@ markers = [
     "integration: marks tests as integration tests",
     "unit: marks tests as unit tests",
 ]
-
+pythonpath = [
+  "src"
+]
 # ============================================================
 # COVERAGE CONFIGURATION
 # ============================================================
