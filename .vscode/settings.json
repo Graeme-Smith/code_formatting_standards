@@ -24,5 +24,4 @@
   },
   "ruff.enable": true,
   "ruff.lint.enable": true,
-  "ruff.format.args": ["--config", "pyproject.toml"]
 }

@@ -2,14 +2,12 @@ import time
 from typing import Any, Protocol, TypedDict
 
 
-def foo(x, y=10):
-    if x > y:
-        print("x>y")
-        return x - y
-    if x == y:
-        return 0
-    z = y - x
-    return z
+def   foo( x , y=  10):
+      if x>y:print("x>y");    return x -y
+      if x==y :
+             return 0
+      z= y-x
+      return   z
 
 
 class thing:
