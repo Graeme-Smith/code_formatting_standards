@@ -13,7 +13,7 @@ build-backend = "setuptools.build_meta"
 name = "project-name" # UPDATE: Rename project
 version = "0.1.0"
 description = "Add your description here" # UPDATE: Add project description
-authors = [{ name = "Your Name", email = "your.email@gosh.nhs.uk" }] # UPDATE: Add your details
+authors = [{ name = "your-name", email = "your-email@gosh.nhs.uk" }] # UPDATE: Add your details
 # license = { text = "MIT" }
 readme = "README.md"
 requires-python = ">=3.10" # UPDATE as appropriate
@@ -33,10 +33,10 @@ dev = [
 # [project.scripts]
 # cli-tool-name = "project-name.cli:main"
 [tool.setuptools]
-package-dir = {"" = "src"}
+package-dir = {"" = "src"} # UPDATE as appropriate
 
 [tool.setuptools.packages.find]
-where = ["src"]
+where = ["src"] # UPDATE as appropriate
 include = ["*"]
 exclude = ["tests*", "scripts*", "docs*", "examples*"] # Amend as necessary
 
@@ -72,7 +72,7 @@ select = [
     "UP",     # pyupgrade
     "B",      # flake8-bugbear  (Noisy)
     "C4",     # flake8-comprehensions
-    "T20",    # flake8-print (no print statements)
+    "T20",    # flake8-print (no print statements) (Noisy)
     "SIM",    # flake8-simplify
     "N",      # pep8-naming
     "Q",      # flake8-quotes
@@ -86,15 +86,15 @@ select = [
     "ANN",    # flake8-annotations  (Noisy)
     "ARG",    # flake8-unused-arguments
     "RET",    # flake8-return
-    "TCH",    # flake8-type-checking
+    # "TCH",    # flake8-type-checking
 ]
 
 ignore = [
     "E501",    # Line too long (formatter handles this)
     "S603",    # subprocess without shell=True (too strict - regularly use subprocess in clinical pipelines)
     "S607",    # Starting a process with a partial path (too strict - regularly use subprocess in clinical pipelines)
-    "ANN101",  # Missing type annotation for self (redundant)
-    "ANN102",  # Missing type annotation for cls (redundant)
+    #"ANN101",  # Missing type annotation for self (redundant)
+    #"ANN102",  # Missing type annotation for cls (redundant)
 ]
 
 # Per-file ignores
@@ -129,7 +129,7 @@ line-ending = "auto" # Like Black, automatically detect the appropriate line end
 # PYRIGHT CONFIGURATION - MODERATE STRICTNESS
 # ============================================================
 [tool.pyright]
-pythonVersion = "3.12"
+pythonVersion = "3.10" # UPDATE as appropriate
 typeCheckingMode = "basic"  # Change to "strict" if you enable strict mode below
 
 # IMPORT AND MODULE CHECKS
@@ -201,7 +201,7 @@ exclude = [
 ]
 
 venvPath = "."
-venv = ".venv"
+venv = ".venv" # UPDATE as appropriate
 
 # STRICT MODE OPTIONS (commented out for now)
 # typeCheckingMode = "strict"
@@ -249,12 +249,12 @@ markers = [
 ]
 pythonpath = [
   "src"
-]
+] # UPDATE as appropriate
 # ============================================================
 # COVERAGE CONFIGURATION
 # ============================================================
 [tool.coverage.run]
-source = ["src"]
+source = ["src"] # UPDATE as appropriate
 # branch = true  # STRICT: Enable branch coverage
 omit = [
     "*/tests/*",
